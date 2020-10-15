@@ -1,22 +1,20 @@
-# from rest_framework.generics import ListAPIView
-# from rest_framework import serializers
+from rest_framework import serializers
+from django.contrib.auth.models import User
 
-# # you're not serializing a model and since you want to display that count I guess, I'd suggest changing the serializer to this.
-# class PacienteSerializer(serializers.Serializer):
-#     # parameter1 = serializers.CharField(max_length=128, required=True)
-#     # count = serializers.integerField(required=True)
+# User Serializer
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email')
 
-#     class Meta:
-#         fields = ('parameter1', 'count')
+# Register Serializer
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
 
-# class StatListView(ListAPIView):
-#     queryset = Stat.objects.raw("SELECT parameter1, COUNT(*) FROM 
-#                statistic_stat GROUP BY parameter1 order by count(*) desc 
-#                LIMIT 10")
-#     serializer_class = StatSerializer
+    def create(self, validated_data):
+        user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
 
-#     def list(self, request):
-#         queryset = self.get_queryset()
-#         # the serializer didn't take my RawQuerySet, so made it into a list
-#         serializer = StatSerializer(list(queryset), many=True)
-#         return Response(serializer.data)
+        return user

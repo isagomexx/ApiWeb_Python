@@ -5,6 +5,9 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticated
 from .models import Paciente, Doctor, GrupoFamilia, Examen, Cita, Incapacidad, Historial, FormulaMedica, Orden
 from django.db import connection, transaction
+from rest_framework import generics, permissions
+from knox.models import AuthToken
+from .serializer import UserSerializer, RegisterSerializer
 
 @api_view(['POST'])
 def registroDoctor(request):
@@ -83,32 +86,7 @@ def registroGrupoFam(request):
     return Response(insertarG)
 
 @api_view(['POST'])
-def registroPaciente(request):
-    # id_grupo_fam = request.data.get('id_grupo_familia')
-    # nom = request.data.get('nombre')
-
-    # try:
-    #     grupoF = GrupoFamilia()
-    #     grupoF.id_grupo_familia = id_grupo_fam
-    #     grupoF.nombre = nom
-    #     with connection.cursor() as cursor:
-        
-    #         cursor.execute("INSERT INTO grupo_familia VALUES(%s,'%s')"%(grupoF.id_grupo_familia,grupoF.nombre))
-
-    #         insertarG = {
-    #             'ID Grupo Familiar': grupoF.id_grupo_familia,
-    #             'Nombre Grupo Familiar': nom,
-    #             'Insertado': 'Ok',
-    #             'error': 0
-    #         }
-    # except Exception as e:
-    #     error = 'No se ha podido insertar el registro.  ' + str(e)
-    #     insertarG = {'Grupo Familiar': None,
-    #                 'insertado': False,
-    #                 'error': error}
-
-    # return Response(insertarG)
-        
+def registroPaciente(request):      
     tipo_doc = request.data.get('tipo_documento')
     num_id = request.data.get('numero_identificacion')
     nombre = request.data.get('nombres')
@@ -126,6 +104,8 @@ def registroPaciente(request):
 
     try:
         paciente = Paciente()
+        g= GrupoFamilia()
+        d = Doctor()
         paciente.tipo_documento = tipo_doc
         paciente.numero_identificacion = num_id
         paciente.nombres = nombre
@@ -136,16 +116,16 @@ def registroPaciente(request):
         paciente.correo = email
         paciente.estrato = est
         paciente.fecha_nacimiento = fec_nac
-        paciente.id_grupo_familiar = grupo_f
-        paciente.id_doctor = doctor
+        g.id_grupo_familiar = grupo_f
+        d.id_doctor = doctor
         paciente.usuario = usu
         paciente.contrasena = password
 
         with connection.cursor() as cursor:
-            cursor.execute("INSERT INTO grupo_familia VALUES('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,'%s','%s')"
+            cursor.execute("INSERT INTO paciente VALUES('%s','%s','%s','%s','%s','%s','%s','%s',%s,'%s',%s,%s,'%s','%s')"
                             %(paciente.tipo_documento,paciente.numero_identificacion,paciente.nombres,paciente.apellido_paterno,
                             paciente.apellido_materno,paciente.telefono,paciente.direccion,paciente.correo,paciente.estrato,
-                            paciente.fecha_nacimiento,paciente.id_grupo_familiar,paciente.id_doctor,paciente.usuario,paciente.contrasena))
+                            paciente.fecha_nacimiento,g.id_grupo_familiar,d.id_doctor,paciente.usuario,paciente.contrasena))
 
         insertarP = {'tipo de documento': tipo_doc,
                     'Numero de identificacion':num_id,
@@ -171,3 +151,16 @@ def registroPaciente(request):
                     'error': error}
     
     return Response(insertarP)
+
+# Register API
+class RegisterAPI(generics.GenericAPIView):
+    serializer_class = RegisterSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+        "user": UserSerializer(user, context=self.get_serializer_context()).data,
+        "token": AuthToken.objects.create(user)[1]
+        })

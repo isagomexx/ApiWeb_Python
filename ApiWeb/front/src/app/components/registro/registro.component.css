@@ -1,0 +1,33 @@
+
+.formu {
+    width:390px;
+    height:640px;
+    background:#3382e9;
+    border-radius:19px;
+    box-shadow:0 0 40px -10px rgb(3, 14, 29);
+    align-content:center;
+    text-align: center;
+}
+
+input {
+    font-size: 15px;
+}
+
+.drop{
+   align-content: flex-start;
+}
+
+input[type="text"] {
+   
+    width:300px;
+    margin: 10px 30px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(123, 156, 228);
+    color: #777;
+    padding: 7px 28px;
+}
+.btn{
+    background-color: rgb(62, 170, 233);
+    color: rgb(229, 229, 236);
+    margin: 10px 40px;
+}

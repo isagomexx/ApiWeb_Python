@@ -2,7 +2,7 @@
    
     <br><br><br>
     <h1>REGISTRO PACIENTE</h1>
-    <form class="form-inline formu" [formGroup]="angForm" (ngSubmit)="guardarPaciente(angForm)">
+    <form class="form-inline formu" (formGroup)="angForm" (ngSubmit)="guardarPaciente(angForm)">
         <div class="drop col-sm-12">
             <select id="Dropdown">
               <option value=”selectU”>SELECCIONE TIPO DE DOCUMENTO</option>
@@ -15,7 +15,7 @@
 
         <br><br><br>
         <label class="num_doc col-sm-4 " for="FormNum_doc"> N°documento</label>
-        <input type="text" class="form-control mb-2 mr-sm-2" id="FormNum_doc" placeholder="Ingrese su número de documento" >
+        <input type="text" class="form-control mb-2 mr-sm-2" id="FormNum_doc" placeholder="Ingrese su número de documento">
         <br>
 
         <label class="nombres col-sm-4 " for="FormName"> Nombres</label>
@@ -55,7 +55,9 @@
 
         <div class="col-sm-5 offset-sm-3">
             <br><br>
+
             <button type="submit" class="btn btn-outline-primary">SIGUIENTE</button>
+
           
         </div>
     </form>

@@ -12,7 +12,9 @@ import { first } from 'rxjs/operators';
 })
 export class RegistroPacienteComponent implements OnInit {
     angForm: FormGroup;
-    constructor(private fb:FormBuilder, private datService:PacienteService, private router:Router){
+    paciente:Paciente= new Paciente();
+
+    constructor(private fb: FormBuilder,private dataService: PacienteService,private router:Router){
       this.angForm = this.fb.group({
         tipo_documento : ['', [Validators.required,Validators.minLength(1)]],
         numero_identificacion: ['', Validators.required],
@@ -30,25 +32,19 @@ export class RegistroPacienteComponent implements OnInit {
         contrasena: ['', Validators.required],
       });
     }
-
+    
 
   ngOnInit(): void {
     
   }
 
   guardarPaciente(angForm1){
-    this.datService.registrarPaciente(angForm1.value.tipo_documento, angForm1.value.numero_identificacion, angForm1.value.nombres, angForm1.value.apellido_paterno, angForm1.value.apellido_materno,
+    this.dataService.registrarPaciente(angForm1.value.tipo_documento, angForm1.value.numero_identificacion, angForm1.value.nombres, angForm1.value.apellido_paterno, angForm1.value.apellido_materno,
                                       angForm1.value.telefono, angForm1.value.direccion, angForm1.value.correo, angForm1.value.estrato, angForm1.value.fecha_nacimiento, angForm1.value.id_grupo_familiar,
                                       angForm1.value.id_doctor,angForm1.value.usuario, angForm1.value.contrasena).pipe(first()).subscribe(data=>{this.router.navigate(['inicio']);},
-                                      error => {
-                                      });
-                                      }
-                                      
-                                      get email() { return this.angForm.get('email'); }
-                                      get password() { return this.angForm.get('password'); }
-                                      get name() { return this.angForm.get('name'); }
+                                      )
   } 
 
 
 
-
+}

@@ -1,40 +1,14 @@
-.formuM {
-    width: 390px;
-    height: 640px;
-    background: #3382e9;
-    border-radius: 19px;
-    box-shadow: 0 0 40px -10px rgb(3, 14, 29);
-    align-content: center;
-    text-align: center;
+.app{
+    background-image: url(./Imagen_registro.jpg);
+    background-size: 1906px 970px;
+    height: 7760px;
+    width: 8820px;
+    max-width: 1900px;
+    max-height: 900px;
+
 }
 
-.formuP {
-    width: 390px;
-    height: 640px;
-    background: #3382e9;
-    border-radius: 19px;
-    box-shadow: 0 0 40px -10px rgb(3, 14, 29);
-    align-content: center;
-    text-align: center;
-}
-
-input {
-    font-size: 15px;
-}
-
-
-
-input[type="text"] {
-    width: 300px;
-    margin: 10px 30px;
-    background: rgb(255, 255, 255);
-    border: 1px solid rgb(123, 156, 228);
-    color: #777;
-    padding: 7px 28px;
-}
-
-.btn {
-    background-color: rgb(62, 170, 233);
-    color: rgb(229, 229, 236);
-    margin: 10px 40px;
+.navBar{
+    width: 1320px;
+    
 }

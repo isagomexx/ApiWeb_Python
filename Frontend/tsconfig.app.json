@@ -7,14 +7,9 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts",
-    // "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxbargauge.ts"
+    "src/polyfills.ts"
   ],
   "include": [
     "src/**/*.d.ts"
-  ],
-  "import":[
-    "angular_jqxbargauge"
   ]
-  
 }

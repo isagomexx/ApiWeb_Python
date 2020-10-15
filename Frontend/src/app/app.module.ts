@@ -17,8 +17,8 @@ import { RegistroFamiliaComponent } from './components/registro-familia/registro
     NavbarComponent,
     RegistroComponent,
     RegistroMedicoComponent,
-    RegistroPacienteComponent
-    // RegistroFamiliaComponent
+    RegistroPacienteComponent,
+    RegistroFamiliaComponent
   ],
   imports: [
     BrowserModule,

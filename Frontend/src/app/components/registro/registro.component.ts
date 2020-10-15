@@ -12,13 +12,13 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  ngOnInit(){
+  ngOnInit(): void {
   }
 medico(){
 this.router.navigate(['/Registro-medico'])
 }
 
-pacientes(){
-  this.router.navigate(['/Iniciar'])
+familia(): void {
+  this.router.navigate(['/Registro-familia'])
 }
 }

@@ -178,9 +178,12 @@ class GrupoFamilia(models.Model):
 
 class Historial(models.Model):
     id_historial = models.AutoField(primary_key=True)
+    id_paciente = models.ForeignKey('Paciente', models.DO_NOTHING, db_column='id_paciente')
     descripcion = models.CharField(max_length=400)
     diagnostico = models.CharField(max_length=400)
-    id_paciente = models.ForeignKey('Paciente', models.DO_NOTHING, db_column='id_paciente')
+    antecedente = models.TextField()
+    evolucion = models.TextField()
+    tratamiento = models.TextField()
 
     class Meta:
         managed = False
@@ -195,6 +198,19 @@ class Incapacidad(models.Model):
     class Meta:
         managed = False
         db_table = 'incapacidad'
+
+
+class KnoxAuthtoken(models.Model):
+    digest = models.CharField(primary_key=True, max_length=128)
+    salt = models.CharField(unique=True, max_length=16)
+    created = models.DateTimeField()
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    expiry = models.DateTimeField(blank=True, null=True)
+    token_key = models.CharField(max_length=8)
+
+    class Meta:
+        managed = False
+        db_table = 'knox_authtoken'
 
 
 class Orden(models.Model):

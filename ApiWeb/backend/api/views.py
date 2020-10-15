@@ -7,7 +7,6 @@ from .models import Paciente, Doctor, GrupoFamilia, Examen, Cita, Incapacidad, H
 from django.db import connection, transaction
 from rest_framework import generics, permissions
 from knox.models import AuthToken
-from .serializer import UserSerializer, RegisterSerializer
 
 @api_view(['POST'])
 def registroDoctor(request):
@@ -152,15 +151,42 @@ def registroPaciente(request):
     
     return Response(insertarP)
 
-# Register API
-class RegisterAPI(generics.GenericAPIView):
-    serializer_class = RegisterSerializer
+@api_view(['POST'])
+def registroHistoria(request):   
+    id_histo = request.data.get('id_historial')
+    id_paciente = request.data.get('id_paciente')
+    sintomas = request.data.get('descripcion')
+    diagnostico = request.data.get('diagnostico')
+    antecedente = request.data.get('antecedente')
+    evolucion = request.data.get('evolucion')
+    tratamiento =request.data.get('tratamiento')
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response({
-        "user": UserSerializer(user, context=self.get_serializer_context()).data,
-        "token": AuthToken.objects.create(user)[1]
-        })
+    try:
+        
+        historia = Historial()
+        paciente = Paciente()
+        historia.id_historial = id_histo
+        paciente.id_paciente = id_paciente
+        historia.descripcion = sintomas
+        historia.diagnostico = diagnostico
+        historia.antecedente = antecedente
+        historia.evolucion = evolucion
+        historia.tratamiento = tratamiento
+
+        with connection.cursor() as cursor:
+            cursor.execute("INSERT INTO historial (id_paciente,descripcion, diagnostico) VALUES ('%s','%s',%s)"%(paciente.id_paciente,historia.descripcion,historia.diagnostico,))
+
+        insertarH = {'id historial': paciente.id_paciente,
+                    'Descipcion de los sintomas':sintomas,
+                    'Diagnostico':diagnostico,
+                    'Paciente':id_paciente,
+                    'insertado': '200 Ok',
+                    'error': 0}
+
+    except Exception as e:
+        error = 'No se ha podido insertar el registro.  ' + str(e)
+        insertarH = {'paciente': None,
+                    'insertado': False,
+                    'error': error}
+    
+    return Response(insertarH)    

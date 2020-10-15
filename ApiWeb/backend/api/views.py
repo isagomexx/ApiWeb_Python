@@ -7,6 +7,7 @@ from .models import Paciente, Doctor, GrupoFamilia, Examen, Cita, Incapacidad, H
 from django.db import connection, transaction
 from rest_framework import generics, permissions
 from knox.models import AuthToken
+from .serializer import PacienteSerializer
 
 @api_view(['POST'])
 def registroDoctor(request):
@@ -195,3 +196,6 @@ def registroHistoria(request):
     
     return Response(insertarH)    
 
+class UsuarioLogin(generics.ListCreateAPIView):  
+   queryset = Paciente.objects.all()   
+   serializer_class = PacienteSerializer

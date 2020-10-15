@@ -174,11 +174,15 @@ def registroHistoria(request):
         historia.tratamiento = tratamiento
 
         with connection.cursor() as cursor:
-            cursor.execute("INSERT INTO historial (id_paciente,descripcion, diagnostico) VALUES ('%s','%s',%s)"%(paciente.id_paciente,historia.descripcion,historia.diagnostico,))
+            cursor.execute("INSERT INTO historial (id_paciente,descripcion, diagnostico, antecedente, evolucion, tratamiento) VALUES (%s,'%s','%s','%s','%s','%s')"
+                          %(paciente.id_paciente,historia.descripcion,historia.diagnostico,historia.antecedente, historia.evolucion, historia.tratamiento))
 
         insertarH = {'id historial': paciente.id_paciente,
                     'Descipcion de los sintomas':sintomas,
                     'Diagnostico':diagnostico,
+                    'Antecedentes':antecedente,
+                    'Evolucion del paciente':evolucion,
+                    'Tratamiento':tratamiento,
                     'Paciente':id_paciente,
                     'insertado': '200 Ok',
                     'error': 0}
@@ -190,3 +194,4 @@ def registroHistoria(request):
                     'error': error}
     
     return Response(insertarH)    
+

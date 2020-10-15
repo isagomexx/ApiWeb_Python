@@ -3,6 +3,9 @@ from api import views
 
 
 urlpatterns = [
-    path('registro', views.registro)
- 
+    path('registrodoc', views.registroDoctor),
+    path('registrogroup', views.registroGrupoFam),
+    path('registropaciente', views.registroPaciente),
+    path('registrohistorial', views.registroHistoria),
+    # path('Listadoc/', DoctorList.as_view())
 ]

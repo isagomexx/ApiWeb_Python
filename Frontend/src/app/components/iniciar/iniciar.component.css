@@ -3,7 +3,7 @@
     background-image: url(./Imagen_inicio.jpg);
     background-size: 1906px 970px;
     height: 2760px;
-    width: 6820px;
+    width: 7820px;
     max-width: 1900px;
     max-height: 920px
 }
@@ -16,6 +16,7 @@
     box-shadow: 0 0 30px -10px rgb(3, 14, 29);
     align-content: center;
     text-align: center;
+    background: linear-gradient(to bottom, rgb(110, 190, 243), white);
 }
 
 input {

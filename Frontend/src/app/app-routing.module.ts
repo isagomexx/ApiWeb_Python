@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'Registro-medico', component: RegistroMedicoComponent },
   { path: 'Registro-paciente', component: RegistroPacienteComponent},
   { path: 'Registro-familia', component: RegistroFamiliaComponent},
-  { path: '**', pathMatch: 'full', redirectTo: 'Iniciar'},
+  { path: '**', pathMatch: 'full', redirectTo: 'Iniciar'}
 ];
 
 @NgModule({

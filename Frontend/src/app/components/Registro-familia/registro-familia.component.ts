@@ -12,7 +12,8 @@ export class RegistroFamiliaComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  paciente(){
-    this.router.navigate(['/Registro-paciente'])
+  
+  inicio(){
+    this.router.navigate(['/Iniciar'])
     }
 }

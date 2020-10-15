@@ -2,7 +2,7 @@
    
     <br><br><br>
     <h1>REGISTRO PACIENTE</h1>
-    <form class="form-inline formu" (formGroup)="angForm" (ngSubmit)="guardarPaciente(angForm)">
+    <form class="form-inline formu">
         <div class="drop col-sm-12">
             <select id="Dropdown">
               <option value=”selectU”>SELECCIONE TIPO DE DOCUMENTO</option>
@@ -56,7 +56,7 @@
         <div class="col-sm-5 offset-sm-3">
             <br><br>
 
-            <button type="submit" class="btn btn-outline-primary">SIGUIENTE</button>
+            <button type="submit" class="btn btn-outline-primary" (click)="familia()">SIGUIENTE</button>
 
           
         </div>

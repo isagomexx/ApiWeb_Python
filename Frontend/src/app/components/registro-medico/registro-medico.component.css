@@ -8,8 +8,21 @@
     text-align: center;
 }
 
+input {
+    font-size: 15px;
+}
+
 .drop {
     align-content: flex-start;
+}
+
+input[type="text"] {
+    width: 300px;
+    margin: 10px 30px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(123, 156, 228);
+    color: #777;
+    padding: 7px 28px;
 }
 
 .btn {

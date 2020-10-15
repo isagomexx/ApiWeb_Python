@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import autenticacion
+from api import views
 
 
 urlpatterns = [
-    path('AUT', autenticacion ),
+    path('registro', views.registro)
  
 ]

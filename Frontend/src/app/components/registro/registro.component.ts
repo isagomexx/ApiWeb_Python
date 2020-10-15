@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-  path = '';
-  constructor() { }
+
+  constructor(private router: Router) { 
+
+  }
 
   ngOnInit(): void {
   }
+medico(){
+this.router.navigate(['/Registro-medico'])
+}
 
+paciente(): void {
+  this.router.navigate(['/Registro-paciente'])
+}
 }

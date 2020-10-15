@@ -7,6 +7,7 @@ import { IniciarComponent } from './components/iniciar/iniciar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { RegistroMedicoComponent } from './components/registro-medico/registro-medico.component';
+import { RegistroPacienteComponent } from './components/registro-paciente/registro-paciente.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { RegistroMedicoComponent } from './components/registro-medico/registro-m
     IniciarComponent,
     NavbarComponent,
     RegistroComponent,
-    RegistroMedicoComponent
+    RegistroMedicoComponent,
+    RegistroPacienteComponent
   ],
   imports: [
     BrowserModule,

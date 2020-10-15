@@ -19,6 +19,6 @@ this.router.navigate(['/Registro-medico'])
 }
 
 pacientes(){
-  this.router.navigate(['/Iniciar'])
+  this.router.navigate(['/Registro-paciente'])
 }
 }

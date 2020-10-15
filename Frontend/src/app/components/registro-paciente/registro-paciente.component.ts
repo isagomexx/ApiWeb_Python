@@ -14,7 +14,7 @@ export class RegistroPacienteComponent implements OnInit {
     angForm: FormGroup;
     paciente:Paciente= new Paciente();
 
-    constructor(private fb: FormBuilder,private dataService: PacienteService,private router:Router){
+    constructor(/*private fb: FormBuilder,private dataService: PacienteService,*/private router:Router){
     //   this.angForm = this.fb.group({
     //     tipo_documento : ['', [Validators.required,Validators.minLength(1)]],
     //     numero_identificacion: ['', Validators.required],
@@ -45,9 +45,9 @@ export class RegistroPacienteComponent implements OnInit {
   //                                     )
   // } 
 
-  // familia(){
-  //   this.router.navigate(['/Registro-familia'])
-  //   }
+   familia(){
+     this.router.navigate(['/Registro-familia'])
+     }
 
 }
 

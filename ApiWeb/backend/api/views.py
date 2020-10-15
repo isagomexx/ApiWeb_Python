@@ -196,6 +196,8 @@ def registroHistoria(request):
     
     return Response(insertarH)    
 
-class UsuarioLogin(generics.ListCreateAPIView):  
-   queryset = Paciente.objects.all()   
-   serializer_class = PacienteSerializer
+@api_view(['POST'])
+def loginUS(request):
+  
+    user =Paciente.objects.filter(usuario=username,contrasena=password)
+    return Response(user)

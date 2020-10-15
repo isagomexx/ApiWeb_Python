@@ -18,7 +18,7 @@ medico(){
 this.router.navigate(['/Registro-medico'])
 }
 
-paciente(): void {
-  this.router.navigate(['/Registro-paciente'])
+familia(): void {
+  this.router.navigate(['/Registro-familia'])
 }
 }
